@@ -28,10 +28,10 @@ func Connect() {
 	DB = db
 	fmt.Println("db connected successfully")
 
-	err = AutoMigrate(db)
+	/*err = AutoMigrate(db)
 	if err != nil {
 		fmt.Println(err)
-	}
+	}*/
 }
 
 func AutoMigrate(connection *gorm.DB) error {
