@@ -6,6 +6,7 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"os"
 )
 
@@ -20,7 +21,9 @@ func Connect() {
 	dbport := os.Getenv("MYSQL_PORT")
 
 	connection := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbuser, dbpassword, dbhost, dbport, dbname)
-	db, err := gorm.Open(mysql.Open(connection), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(connection), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 
 	if err != nil {
 		panic("db connection failed")
